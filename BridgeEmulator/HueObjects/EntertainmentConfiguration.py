@@ -205,15 +205,11 @@ class EntertainmentConfiguration():
                         channel["position"] = {"x": gradienStripPositions[x]["x"],
                                                "y": gradienStripPositions[x]["y"], "z": gradienStripPositions[x]["z"]}
                     elif light().modelid in ["915005987201", "LCX004", "LCX006"]:
-                        if x == 0:
-                            channel["position"] = {"x": self.locations[light(
-                            )][0]["x"], "y": self.locations[light()][0]["y"], "z": self.locations[light()][0]["z"]}
-                        elif x == 2:
-                            channel["position"] = {"x": self.locations[light(
-                            )][1]["x"], "y": self.locations[light()][1]["y"], "z": self.locations[light()][1]["z"]}
+                        locs = self.locations[light()]
+                        if x < len(locs):
+                            channel["position"] = {"x": locs[x]["x"], "y": locs[x]["y"], "z": locs[x]["z"]}
                         else:
-                            channel["position"] = {"x": (self.locations[light()][0]["x"] + self.locations[light()][1]["x"]) / 2, "y": (self.locations[light(
-                            )][0]["y"] + self.locations[light()][1]["y"]) / 2, "z": (self.locations[light()][0]["z"] + self.locations[light()][1]["z"]) / 2}
+                            channel["position"] = {"x": locs[-1]["x"], "y": locs[-1]["y"], "z": locs[-1]["z"]}
                     else:
                         channel["position"] = {"x": self.locations[light(
                         )][0]["x"], "y": self.locations[light()][0]["y"], "z": self.locations[light()][0]["z"]}
